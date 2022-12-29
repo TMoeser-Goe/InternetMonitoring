@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+ <body>
+  <a href="/get_csv">Download CSV.</a>
+  <a href="/force_measurement">Do Measurement now.</a>
+  <h1>Data</h1>
+  <table>
+      <tr><th></th><th>Seit Beginn</th><th>30 Tage</th><th>1 Woche</th></tr>
+      <tr><th>Totale Datapunkte</th><td>{{ total_measurements }}</td><td>{{ total_measurements_monthly }}</td><td>{{ total_measurements_weekly }}</td></tr>
+      <tr><th>davon <50% Download</th><td>{{ bad_download }}</td><td>{{ bad_download_monthly }}</td><td>{{ bad_download_weekly }}</td></tr>
+      <tr><th>davon <25% Upload</th><td>{{ bad_upload }}</td><td>{{ bad_upload_monthly }}</td><td>{{ bad_upload_weekly }}</td></tr>
+  </table>
+
+  <h1>Download Plot</h1>
+  <div id='downloadchart' class='chart'”></div>
+  <h1>Upload Plot</h1>
+  <div id='uploadchart' class='chart'”></div>
+</body><script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var download_graphs = {{downloadJSON | safe}};
+  Plotly.plot('downloadchart',download_graphs,{});
+  var upload_graphs = {{uploadJSON | safe}};
+  Plotly.plot('uploadchart',upload_graphs,{});
+</script>
+</html>
